@@ -13,3 +13,19 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
+//Add routes, API and view
+app.use(routes);
+
+//Connect to the MongoDB
+mongoose.connect(
+    process.env.MONGOBD_URI || "mongodb://<dbuser>:<dbpassword>@ds231961.mlab.com:31961/heroku_5kfgl71f",
+    {
+        useCreateIndex: true,
+        useNewUrlParser: true
+    }
+);
+
+//Start the API server
+app.listen(PORT, () =>
+  console.log('🌎  ==> API Server now listening on PORT ${PORT}!`')
+);
